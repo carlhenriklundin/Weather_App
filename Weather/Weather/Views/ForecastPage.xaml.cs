@@ -38,11 +38,20 @@ namespace Weather.Views
 
             //This is making the first load of data
             MainThread.BeginInvokeOnMainThread(async () => {await LoadForecast();});
+            
+
+            
+            CityName.Text = groupedforecast.City + "gfdgdfg";
+           
+           
         }
 
         private async Task LoadForecast()
         {
             //Heare you load the forecast 
+            var loadedForecast = await service.GetForecastAsync(this.Title.ToString());
+            groupedforecast.City = loadedForecast.City;
+            groupedforecast.Items = loadedForecast.Items.GroupBy(item => item.DateTime.Date);
         }
     }
 }

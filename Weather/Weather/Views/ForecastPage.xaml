@@ -5,6 +5,9 @@
     <ContentPage.Content>
         <StackLayout>
             <Label>Your code to present the weather data for example in a ListView</Label>
+
+            <Label x:Name="CityName" Text="" HorizontalOptions="Center" FontSize="24"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

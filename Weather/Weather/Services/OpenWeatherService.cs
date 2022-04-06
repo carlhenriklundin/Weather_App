@@ -26,7 +26,7 @@ namespace Weather.Services
             {
                 if ((int)(DateTime.Now - _cacheCity.Item1).TotalSeconds <= 60)
                 {
-                    WeatherForecastAvailable.Invoke(this, $"Cached weather forecast for {City} available.");
+                //    WeatherForecastAvailable.Invoke(this, $"Cached weather forecast for {City} available.");
                     return _cacheCity.Item2;
                 }
             }
@@ -38,7 +38,7 @@ namespace Weather.Services
 
             data.TryAdd(City, (DateTime.Now, forecast));
 
-            WeatherForecastAvailable.Invoke(this, $"New weather forecast for {City} available.");
+            // WeatherForecastAvailable.Invoke(this, $"New weather forecast for {City} available.");
             return forecast;
 
         }

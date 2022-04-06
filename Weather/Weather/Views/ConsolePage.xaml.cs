@@ -16,10 +16,12 @@ namespace Weather.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ConsolePage : ContentPage
     {
+       
         public ConsolePage()
         {
             InitializeComponent();
-            myOutput.Text = "";
+           
+           
         }
         public void WriteLine()
         {

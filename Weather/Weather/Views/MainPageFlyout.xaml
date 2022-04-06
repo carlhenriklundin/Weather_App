@@ -25,7 +25,7 @@
           <Label
               Grid.Column="1"
               Grid.Row="2"
-              Text="Weather project"
+              Text="Vädret i världen"
               Style="{DynamicResource SubtitleStyle}"/>
         </Grid>
       </ListView.Header>
