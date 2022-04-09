@@ -22,13 +22,18 @@
                                     <Label HorizontalOptions="End" FontSize="15" TextColor="Aqua" Text="{Binding MaxTemperature}"/>
                                     <Label HorizontalOptions="End" FontSize="15" TextColor="Aqua" Text="{Binding MinTemperature}"/>
                                 </StackLayout>
-                                <Label HorizontalOptions="End" FontSize="15" TextColor="Aqua" Text="{Binding WindSpeed}"/>
-                                
+                                <Label HorizontalOptions="End" FontSize="25" TextColor="Aqua" Text="{Binding WindSpeed}"/>
+                               
+
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <Image x:Name="image" Source="" />
+
+
 
 
             <ListView x:Name="CustomGroupedList" IsGroupingEnabled="true" HasUnevenRows="true" ItemTapped="ListViewItemTapped">

@@ -18,6 +18,7 @@ namespace Weather.Models
 
     public class ForecastForOneDay
     {
+        public static int Counter;
         public string Day { get; set; }
         public string Date { get; set; }
         public string MaxTemperature { get; set; }
