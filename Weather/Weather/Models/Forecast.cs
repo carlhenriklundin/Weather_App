@@ -15,4 +15,14 @@ namespace Weather.Models
         public string City { get; set; }
         public IEnumerable<IGrouping<DateTime, ForecastItem>> Items { get; set; }
     }
+
+    public class ForecastForOneDay
+    {
+        public string Day { get; set; }
+        public string Date { get; set; }
+        public string MaxTemperature { get; set; }
+        public string MinTemperature { get; set; }
+        public string WindSpeed { get; set; }
+    }
+
 }

@@ -20,6 +20,7 @@ namespace Weather.Views
     {
         OpenWeatherService service;
         GroupedForecast groupedforecast;
+        
 
         public ForecastPage()
         {
@@ -38,20 +39,51 @@ namespace Weather.Views
 
             //This is making the first load of data
             MainThread.BeginInvokeOnMainThread(async () => {await LoadForecast();});
-            
+
+
+            //CityName.Text = groupedforecast.City.ToString();
 
             
-            CityName.Text = groupedforecast.City + "gfdgdfg";
-           
-           
         }
 
+
+        private async void ListViewItemTapped(object sender, ItemTappedEventArgs e)
+        {
+          //  var item = e.Item as Forecast;
+          //  if (item != null) await DisplayAlert("Item tapped", $"Rectangle selected: {item}", "OK");
+
+           // ((ListView)sender).SelectedItem = null;
+        }
+
+        
         private async Task LoadForecast()
         {
             //Heare you load the forecast 
             var loadedForecast = await service.GetForecastAsync(this.Title.ToString());
             groupedforecast.City = loadedForecast.City;
             groupedforecast.Items = loadedForecast.Items.GroupBy(item => item.DateTime.Date);
+            CityName.Text = groupedforecast.City.ToString();
+            CustomGroupedList.ItemsSource = groupedforecast.Items;
+            List<ForecastForOneDay> daySumForecastList;
+            groupedforecast.Items.ToList().ForEach(x =>
+            {
+                new ForecastForOneDay { Date = $"{x.Key:M}", MaxTemperature = $"{(int)x.Max(m => m.Temperature)}°C", MinTemperature = $"{(int)x.Max(m => m.Temperature)}°C", WindSpeed = $"{x.Select(m => m.WindSpeed)} m/s" }
+            });
+
+
+            groupedforecast.Items.Take(3).ToList().ForEach(x => { });
+            CustomGroupedList.ItemsSource = groupedforecast.Items.Take(3).ToList().ForEach(x => { });
+
+
+
+
+            CustomList.ItemsSource = new List<ForecastForOneDay>
+            {
+                new ForecastForOneDay {Day = "Idag", Date = $"{groupedforecast.Items.First().Key:M}", MaxTemperature = $"{(int) groupedforecast.Items.First().Max(m => m.Temperature)}°C", MinTemperature = $"{(int) groupedforecast.Items.First().Max(m => m.Temperature)}°C", WindSpeed = loadedForecast.Items.First().WindSpeed },
+                new ForecastForOneDay {Day = "Imorgon", Date = $"{groupedforecast.Items.Skip(1).First().Key:M}", MaxTemperature = groupedforecast.Items.Skip(1).First().Max(m => m.Temperature), MinTemperature = groupedforecast.Items.Skip(1).First().Min(m => m.Temperature), WindSpeed = loadedForecast.Items.Skip(1).First().WindSpeed },
+                new ForecastForOneDay {Day = groupedforecast.Items.Skip(2).First().Key.DayOfWeek.ToString(), Date =$"{groupedforecast.Items.Skip(2).First().Key:M}",  MaxTemperature = groupedforecast.Items.Skip(2).First().Max(m => m.Temperature), MinTemperature = groupedforecast.Items.Skip(2).First().Min(m => m.Temperature), WindSpeed = loadedForecast.Items.Skip(2).First().WindSpeed },
+            };
+
         }
     }
 }
