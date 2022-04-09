@@ -24,6 +24,7 @@ namespace Weather.Models
         public string MaxTemperature { get; set; }
         public string MinTemperature { get; set; }
         public string WindSpeed { get; set; }
+        public string Icon { get; set; }
     }
 
 }

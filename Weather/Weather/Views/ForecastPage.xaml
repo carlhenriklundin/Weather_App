@@ -8,11 +8,13 @@
 
             <Label x:Name="CityName" Text="" HorizontalOptions="Center" FontSize="24"/>
 
-            <ListView x:Name="CustomList" RowHeight="80" BackgroundColor="Black" ItemTapped="ListViewItemTapped" >
+            <ListView x:Name="CustomList" RowHeight="80" WidthRequest="50" BackgroundColor="Black" ItemTapped="ListViewItemTapped" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="25,10,55,15">
+
+                                <Image Source="{Binding Icon}" />
                                 <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
                                     <Label HorizontalOptions="Start" FontSize="20" FontAttributes="Bold" TextColor="White" Text="{Binding Day}"/>
                                     <Label HorizontalOptions="Start" FontSize="12" FontAttributes="Bold" TextColor="White" Text="{Binding Date}"/>
@@ -48,9 +50,14 @@
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
+                    
                     <DataTemplate>
-                        <TextCell Text="{Binding Color, StringFormat='Rectangle Color: {0}'}" Detail="{Binding .}"/>
+
+                        <TextCell Text="{Binding .}"/>
+                     
                     </DataTemplate>
+
+                    
                 </ListView.ItemTemplate>
             </ListView>
 

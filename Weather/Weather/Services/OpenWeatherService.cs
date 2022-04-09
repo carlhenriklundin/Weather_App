@@ -80,7 +80,7 @@ namespace Weather.Services
                 DateTime = UnixTimeStampToDateTime(x.dt),
                 WindSpeed = x.wind.speed,
                 Description = x.weather[0].description,
-                Icon = x.weather[0].icon
+                Icon = "http://openweathermap.org/img/wn/" + x.weather[0].icon + "@2x.png"
             }).ToList();
 
             Forecast forecast = new Forecast();

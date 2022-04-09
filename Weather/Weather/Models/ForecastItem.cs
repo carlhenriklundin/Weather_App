@@ -10,6 +10,6 @@ namespace Weather.Models
         public string Description { get; set; }
         public string Icon { get; set; }
 
-        public override string ToString() => $"{Description}, temperature: {Temperature} degC, wind: {WindSpeed} m/s";
+        public override string ToString() => $"  - {DateTime:t}: {Description.ToUpperInvariant()}, temperature: {Temperature} degC, wind: {WindSpeed} m/s";
     }
 }

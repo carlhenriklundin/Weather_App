@@ -67,10 +67,10 @@ namespace Weather.Views
             List<ForecastForOneDay> daySumForecastList = new List<ForecastForOneDay>();
             groupedforecast.Items.Take(3).ToList().ForEach(x =>
             {
-                daySumForecastList.Add(new ForecastForOneDay { Day = $"{x.Key.DayOfWeek}", Date = $"{x.Key:M}", MaxTemperature = $"{(int)x.Max(m => m.Temperature)}°C", MinTemperature = $"{(int)x.Min(m => m.Temperature)}°C", WindSpeed = $"{x.Max(m => m.WindSpeed)} m/s" });
+                daySumForecastList.Add(new ForecastForOneDay { Day = $"{x.Key.DayOfWeek}", Date = $"{x.Key:M}", MaxTemperature = $"{(int)x.Max(m => m.Temperature)}°C", MinTemperature = $"{(int)x.Min(m => m.Temperature)}°C", WindSpeed = $"{x.Max(m => m.WindSpeed)} m/s", Icon = x.SingleOrDefault(s => s.DateTime.Hour == 14).Icon.ToString()});
             });
             CustomList.ItemsSource = daySumForecastList;
-            image.Source = $"{Title}.jpg";
+            image.Source = $"";
         }
     }
 }
