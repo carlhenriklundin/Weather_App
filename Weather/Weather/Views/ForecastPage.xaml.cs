@@ -20,7 +20,9 @@ namespace Weather.Views
     {
         OpenWeatherService service;
         GroupedForecast groupedforecast;
-        
+        Forecast loadedForecast;
+
+
 
         public ForecastPage()
         {
@@ -28,6 +30,7 @@ namespace Weather.Views
             
             service = new OpenWeatherService();
             groupedforecast = new GroupedForecast();
+            loadedForecast = new Forecast();
         }
 
         protected override void OnAppearing()
@@ -59,7 +62,7 @@ namespace Weather.Views
         private async Task LoadForecast()
         {
             //Heare you load the forecast 
-            var loadedForecast = await service.GetForecastAsync(this.Title.ToString());
+            loadedForecast = await service.GetForecastAsync(this.Title.ToString());
             groupedforecast.City = loadedForecast.City;
             groupedforecast.Items = loadedForecast.Items.GroupBy(item => item.DateTime.Date);
             CityName.Text = groupedforecast.City.ToString();
@@ -67,10 +70,23 @@ namespace Weather.Views
             List<ForecastForOneDay> daySumForecastList = new List<ForecastForOneDay>();
             groupedforecast.Items.Take(3).ToList().ForEach(x =>
             {
-                daySumForecastList.Add(new ForecastForOneDay { Day = $"{x.Key.DayOfWeek}", Date = $"{x.Key:M}", MaxTemperature = $"{(int)x.Max(m => m.Temperature)}°C", MinTemperature = $"{(int)x.Min(m => m.Temperature)}°C", WindSpeed = $"{x.Max(m => m.WindSpeed)} m/s", Icon = x.SingleOrDefault(s => s.DateTime.Hour == 14).Icon.ToString()});
+                daySumForecastList.Add(new ForecastForOneDay { Day = $"{x.Key.DayOfWeek}", Date = $"{x.Key:M}", MaxTemperature = $"{(int)x.Max(m => m.Temperature)}°C", MinTemperature = $"{(int)x.Min(m => m.Temperature)}°C", WindSpeed = $"{x.Max(m => m.WindSpeed)} m/s", Icon = x.SingleOrDefault(s => s.DateTime.Hour == 20).Icon.ToString()});
             });
             CustomList.ItemsSource = daySumForecastList;
-            image.Source = $"";
+           
+        }
+
+        
+
+        private void slider_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            var pic = sender as Slider;
+            if (pic != null) 
+            wind.Text = $"Wind speed: {loadedForecast.Items[(int)pic.Value].WindSpeed}";
+            Temp.Text = $"Temperature: {loadedForecast.Items[(int)pic.Value].Temperature}";
+            description.Text = $"{loadedForecast.Items[(int)pic.Value].Description}";
+            CurrentWeather.Source = $"{loadedForecast.Items[(int)pic.Value].Icon}";
+            TimeNow.Text = $"The weather {loadedForecast.Items[(int)pic.Value].DateTime:f}";
         }
     }
 }

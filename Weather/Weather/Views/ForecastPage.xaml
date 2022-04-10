@@ -33,9 +33,12 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Image x:Name="image" Source="" />
-
-
+            <Label x:Name="TimeNow" Text="" />
+            <Image x:Name="CurrentWeather" Source="" HorizontalOptions="Start" />
+            <Label x:Name="wind" Text="" />
+            <Label x:Name="Temp" Text="" />
+            <Label x:Name="description" Text="" />
+            <Slider x:Name="slider" Minimum="0" Maximum="39" ValueChanged="slider_ValueChanged" WidthRequest="400" HorizontalOptions="Start"/>
 
 
             <ListView x:Name="CustomGroupedList" IsGroupingEnabled="true" HasUnevenRows="true" ItemTapped="ListViewItemTapped">
