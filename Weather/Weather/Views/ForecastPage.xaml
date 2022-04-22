@@ -3,28 +3,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Weather.Views.ForecastPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label>Your code to present the weather data for example in a ListView</Label>
+        <StackLayout MinimumWidthRequest="2000">
 
-            <Label x:Name="CityName" Text="" HorizontalOptions="Center" FontSize="24"/>
+            <StackLayout Orientation="Horizontal">
+                <Label x:Name="CityName" Text="" HorizontalOptions="Start" FontSize="24"/>
+            <Button Text="Refresh" Clicked="Button_Clicked"/>
+            </StackLayout>
 
-            <ListView x:Name="CustomList" RowHeight="80" WidthRequest="50" BackgroundColor="Black" ItemTapped="ListViewItemTapped" >
+            <Grid HeightRequest="1400" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0" VerticalOptions="FillAndExpand">
+                    <Label x:Name="TimeNow" Text="" FontSize="15" FontAttributes="Bold" TextColor="Black"/>
+                    <Image x:Name="currentWeather" Source="" HorizontalOptions="Start"/>
+                    <Label x:Name="wind" Text="" FontSize="20" FontAttributes="Bold" TextColor="Black"/>
+                    <Label x:Name="Temp" Text="" FontSize="20" FontAttributes="Bold" TextColor="Black"/>
+                    <Label x:Name="description" Text="" FontSize="20" FontAttributes="Bold" TextColor="Black" />
+                    <Slider x:Name="slider" Minimum="0" Maximum="39" ValueChanged="slider_ValueChanged" ThumbColor="Black" BackgroundColor="Black"  VerticalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <ListView x:Name="ThreeDayWeatherList"  BackgroundColor="White" Grid.Column="1" ItemSelected="ThreeDayWeatherList_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Padding="25,10,55,15">
+                        <ViewCell >
+                            
+                            <StackLayout HorizontalOptions="Start" Orientation="Horizontal" HeightRequest="100">
 
                                 <Image Source="{Binding Icon}" />
                                 <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
-                                    <Label HorizontalOptions="Start" FontSize="20" FontAttributes="Bold" TextColor="White" Text="{Binding Day}"/>
-                                    <Label HorizontalOptions="Start" FontSize="12" FontAttributes="Bold" TextColor="White" Text="{Binding Date}"/>
+                                    <Label HorizontalOptions="Start" FontSize="20" FontAttributes="Bold" TextColor="Black" Text="{Binding Day}"/>
+                                    <Label HorizontalOptions="Start" FontSize="12" FontAttributes="Bold" TextColor="Black" Text="{Binding Date}"/>
                                 </StackLayout>
 
                                 <StackLayout  Orientation="Vertical">
-                                    <Label HorizontalOptions="End" FontSize="15" TextColor="Aqua" Text="{Binding MaxTemperature}"/>
-                                    <Label HorizontalOptions="End" FontSize="15" TextColor="Aqua" Text="{Binding MinTemperature}"/>
+                                    <Label HorizontalOptions="End" FontSize="15" TextColor="black" Text="{Binding MaxTemperature}"/>
+                                    <Label HorizontalOptions="End" FontSize="15" TextColor="black" Text="{Binding MinTemperature}"/>
                                 </StackLayout>
-                                <Label HorizontalOptions="End" FontSize="25" TextColor="Aqua" Text="{Binding WindSpeed}"/>
+                                <Label HorizontalOptions="End" FontSize="25" TextColor="Black" Text="{Binding WindSpeed}"/>
                                
 
                             </StackLayout>
@@ -32,22 +49,15 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            </Grid>
 
-            <Label x:Name="TimeNow" Text="" />
-            <Image x:Name="CurrentWeather" Source="" HorizontalOptions="Start" />
-            <Label x:Name="wind" Text="" />
-            <Label x:Name="Temp" Text="" />
-            <Label x:Name="description" Text="" />
-            <Slider x:Name="slider" Minimum="0" Maximum="39" ValueChanged="slider_ValueChanged" WidthRequest="400" HorizontalOptions="Start"/>
-
-
-            <ListView x:Name="CustomGroupedList" IsGroupingEnabled="true" HasUnevenRows="true" ItemTapped="ListViewItemTapped">
+            <ListView x:Name="WeatherForecastList" IsGroupingEnabled="true" >
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell Height="40">
                             <StackLayout HorizontalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="White" 
                                  Padding="5" Orientation="Horizontal">
-                                <Label FontSize="16" TextColor="Blue" VerticalOptions="Center" Text="{Binding Key}" />
+                                <Label FontSize="16" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding Key}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

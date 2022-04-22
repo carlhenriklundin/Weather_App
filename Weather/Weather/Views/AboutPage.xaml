@@ -8,10 +8,10 @@
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <Label Text="Project Part B" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Label Text="Om Väder-appen" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Den här appen är framtagen för att presentera globalt väder för barn i åldern 6-12 år." 
+        <Label Text="Weather in Xamarin.Forms" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="This part of the project is about making a simple UI in to the console weather service made in project part A using Flyout." 
                FontSize="16" Padding="30,0,30,0"/>
-        <Label Text="Välj en stad och ge den ett försök" FontSize="16" Padding="30,0,30,0"/>
+        <Label Text="Select a city and give it a try!" FontSize="16" Padding="30,0,30,0"/>
         <Label FontSize="16" Padding="30,24,30,0">
             
             <Label.FormattedText>
